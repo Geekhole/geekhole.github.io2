@@ -6,7 +6,7 @@ date: '2016-01-11'
 comments: true
 title: Targeting the iPad – CSS
 category:
-  - Web Development
+  - Web
 ---
 Sometimes we want websites to look different in certain platforms. In this case we will be looking at targeting iPads with CSS to make it look different from other platforms.
 

@@ -29,8 +29,6 @@ defaults:
       type: "posts"
     values:
       layout: "post"
-      header-color: 808080
-      text-color: FFFFFF
 
 prose:
   rooturl: '_posts'
@@ -92,8 +90,8 @@ prose:
               value: Personal
             - name: "Android"
               value: Android
-            - name: "Web-Development"
-              value: Web Development
+            - name: "Web"
+              value: Web
             - name: "Reviews"
               value: Reviews
           alterable: true
