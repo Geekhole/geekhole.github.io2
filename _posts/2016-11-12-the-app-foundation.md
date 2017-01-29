@@ -12,9 +12,9 @@ The foundation of any app is very important. If you’ve been developing for a w
 
 So to help others along (and to speed up development of my own apps) I have published a project that has the basics that every project that I write has. Below are some hints and tips for using it, but hopefully if you look at the code it’s mostly self explanatory!
 
-<p class="align-center">
+<p class="text-center">
   <a role="button" class="btn btn-primary btn-lg" href="https://github.com/Geekhole/Foundations">
-    Get the repository on Github
+    👩‍💻 Get the repository on Github
   </a>
 </p>
 
