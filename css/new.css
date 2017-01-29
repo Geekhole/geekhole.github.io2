@@ -73,6 +73,9 @@ body {
   line-height: 1.6em;
   margin-bottom: 1.2em; }
 
+.post-content .btn {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+
 .post-content li {
   margin-bottom: 0.6em; }
 
