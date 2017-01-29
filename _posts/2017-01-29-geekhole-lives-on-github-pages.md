@@ -4,7 +4,7 @@ published: true
 author: Joshua Mason
 date: '2017-01-29 14:38 +0000'
 comments: false
-title: Geekhole lives on Github pages!
+title: Coming to you from GitHub Pages!
 category:
   - Web
 ---
