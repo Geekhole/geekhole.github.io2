@@ -17,7 +17,7 @@ Loads of people in the tech community have been moving their blogs to GitHub Pag
 **Here's a few things worth mentioning:**
 
 * The theme is built on good ol' [Boostrap 3](https://getbootstrap.com/), with a few colour and font amendments in the Saas.
-* My categories and archive are all done using Jekyll, I followed a great guide by *find person*. It's pretty simple, but it's all I need right now.
+* My categories and archive are all done using Jekyll, I followed a great guide by [codinfox](https://github.com/codinfox/codinfox-lanyon). It's pretty simple, but it's all I need right now.
 * I'm using [Prose.io](http://prose.io/) for my everyday post writing, [check out the Prose stuff](https://github.com/Geekhole/geekhole.github.io/blob/master/_config.yml) in my `config.yml` file.
 * There's [some advanced Liquid](https://github.com/Geekhole/geekhole.github.io/blob/master/index.html) going on in my `index.html` to call out the latest post in a jumbotron. Have a poke in the file to see what's going on.
 
