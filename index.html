@@ -1,0 +1,81 @@
+---
+layout: page
+description: "All the tech you can take"
+---
+
+{% for post in paginator.posts %}
+  {% if page.url contains 'page' %}
+    {% if forloop.first %}
+      <div class="container homepage narrow-width">
+    {% endif %}
+    {% cycle 'divstart': ' <div class="row"> ', '' %}
+      <div class="col-sm-6 other-post">
+        <h3><span><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></span></h3>
+        <p class="meta text-muted">
+          {% if post.author %}
+            {{ post.author }}
+          {% else %}
+            {{ site.title }}
+          {% endif %}
+          on
+          {{ post.date | date: "%-d %B %Y" }}
+        </p>
+      </div>
+    {% cycle 'divend': '', '</div>' %}
+    {% if forloop.last %}
+      </div>
+    {% endif %}
+  {% else %}
+    {% if forloop.first %}
+      <div class="container homepage narrow-width">
+        <div class="jumbotron clearfix">
+          <p>
+            <span class="label label-warning">✨ LATEST</span>
+          </p>
+          <h2><span><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></span></h2>
+          <p class="meta text-muted">
+            Posted by
+            {% if post.author %}
+              {{ post.author }}
+            {% else %}
+              {{ site.title }}
+            {% endif %}
+            on
+            {{ post.date | date: "%-d %B %Y" }}
+          </p>
+          <p class="exerpt"><small>
+            {{ post.content | strip_html | truncatewords:'40' }}
+          </small></p>
+          <a role="button" class="btn btn-default pull-right" href="{{ post.url | prepend: site.baseurl }}">
+            Continue reading post &rarr;
+          </a>
+        </div>
+      </div>
+      <div class="container homepage narrow-width">
+    {% else %}
+      {% cycle 'divstart': ' <div class="row"> ', '' %}
+        <div class="col-sm-6 other-post">
+          <h3><span><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></span></h3>
+          <p class="meta text-muted">
+            {% if post.author %}
+              {{ post.author }}
+            {% else %}
+              {{ site.title }}
+            {% endif %}
+            on
+            {{ post.date | date: "%-d %B %Y" }}
+          </p>
+        </div>
+      {% cycle 'divend': '', '</div>' %}
+    {% endif %}
+    {% if forloop.last %}
+      </div>
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+<div class="container blog-pager narrow-width">
+  <a role="button" class="btn btn-default" href="{{ post.url | prepend: site.baseurl }}">
+    &larr; View my archive
+  </a>
+</div>

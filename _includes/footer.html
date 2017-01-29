@@ -1,0 +1,35 @@
+    <div class="container narrow-width">
+      <footer class="footer">
+        <div class="row">
+          <div class="col-sm-6">
+            <p>
+              By <a href="http://joshuamason.me/">Joshua Mason</a>. Hosted on Github Pages.<br>
+              Unless otherwise stated, everything here is <a href="https://creativecommons.org/licenses/by-nc/3.0/">CC-BY-NC</a>.
+            </p>
+          </div>
+          <div class="col-sm-6 text-right social-icons">
+            <a href="https://twitter.com/{{ site.twitter_username }}"><span class="symbol">circletwitterbird</span></a>
+            <a href="https://github.com/{{ site.github_username }}"><span class="symbol">circlegithubalt</span></a>
+            <a href="https://uk.linkedin.com/in/josh-mason-733522121"><span class="symbol">circlelinkedin</span></a>
+          </div>
+      </footer>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    {% if page.date %}
+      <script type="text/javascript">
+        $('h2').replaceWith(function() {
+        var span = $('<span>').text($(this).text());
+        return $('<h2>').append(span);
+        });
+        $('h3').replaceWith(function() {
+        var span = $('<span>').text($(this).text());
+        return $('<h3>').append(span);
+        });
+      </script>
+    {% endif %}
+    <script src="{{ "/js/smartquotes.min.js" | prepend: site.baseurl }}"></script>
+  </body>
+</html>

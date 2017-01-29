@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+        Care for an Espresso? – Idling Resources - Geekhole
+      
+    </title>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/new.css" rel="stylesheet">
+    <link href="/css/syntax.css" rel="stylesheet">
+    <link href="/fonts/socialicons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700|Open+Sans:400,400i,700|Source+Serif+Pro:400,600,700&amp;subset=latin-ext" rel="stylesheet">
+    <meta name="author" content="Joshua Mason">
+    <meta name="description" content="All the tech you can take.">
+    <!-- I'm not sure what this does 👇 -->
+    <link rel="canonical" href="http://localhost:4000/android/2015/09/20/care-for-an-espresso-idling-resources/">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Geekhole" />
+</head>
+
+
+<body>
+
+    
+
+
+
+
+
+
+
+
+
+    <div class="container narrow-width header">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">
+          <img src="/img/geekhole.png" style="height: 80px;">
+        </a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <!-- <ul class="nav nav-pills navbar-nav navbar-right"> -->
+        <ul class="nav nav-pills navbar-right">
+          <li >
+            <a href="/">Home</a>
+          </li>
+          
+            
+              
+                
+                  <li >
+                    <a href="/about/">About</a>
+                  </li>
+                
+              
+            
+          
+            
+              
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              
+                <li><a href="/category/#android">Android</a></li>
+              
+                <li><a href="/category/#development">Development</a></li>
+              
+                <li><a href="/category/#personal">Personal</a></li>
+              
+                <li><a href="/category/#reviews">Reviews</a></li>
+              
+                <li><a href="/category/#web-development">Web Development</a></li>
+              
+              <li role="separator" class="divider"></li>
+              <li><a href="/category/">Archive</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+    <div class="blog-post">
+  <!-- header -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1><span>Care for an Espresso? – Idling Resources</span></h1>
+      <p class="meta text-muted">
+        Posted by
+        
+          Joshua Mason
+        
+        on
+        20 September 2015
+      </p>
+    </div>
+  </div>
+  <!-- content -->
+  <div class="container narrow-width post-content">
+    <p>One major problem when doing integrated testing of any kind is that if you have asynchronous operations you need your tests to wait for these operations to complete before going forwards. After I recently start using Espresso this issue came up pretty quickly, and despite it being quite an obvious thing, google searches turned up very little. Consequently I am documenting the way to deal with these cases here to make things a little easier for others!</p>
+
+<p>So, what we will be talking about here are called Idling Resources. The best way that I have found to implement these into a large projects is to put seven methods into a base class that all of your activities and fragments extend. Three of these methods are required when you implement <code class="highlighter-rouge">IdlingResources</code>, the other four are an easy way to manage these resources, especially if you have more than one asynchronous operation that may be running at the same time. So, to get started I will be using a base class called <code class="highlighter-rouge">BaseActivity</code> (Such an imaginative name, I know).</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaseActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="kd">implements</span> <span class="n">IdlingResource</span> <span class="o">{</span>
+
+    <span class="kd">protected</span> <span class="kt">boolean</span> <span class="n">idle</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span> <span class="n">resources</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="kd">private</span> <span class="n">IdlingResource</span><span class="o">.</span><span class="na">ResourceCallback</span> <span class="n">callback</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">getClass</span><span class="o">().</span><span class="na">getName</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isIdleNow</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">idle</span> <span class="o">&amp;&amp;</span> <span class="n">resources</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">registerIdleTransitionCallback</span><span class="o">(</span><span class="n">ResourceCallback</span> <span class="n">callback</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">callback</span> <span class="o">=</span> <span class="n">callback</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">registerResource</span><span class="o">(</span><span class="n">String</span> <span class="n">identifier</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">resources</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">identifier</span><span class="o">);</span>
+        <span class="n">updateIdle</span><span class="o">();</span>
+    <span class="o">}</span>
+
+
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">unregisterResource</span><span class="o">(</span><span class="n">String</span> <span class="n">identifier</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">resources</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">identifier</span><span class="o">);</span>
+        <span class="n">updateIdle</span><span class="o">();</span>
+    <span class="o">}</span>
+
+
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">setIdle</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">idle</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">idle</span> <span class="o">!=</span> <span class="n">idle</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">idle</span> <span class="o">=</span> <span class="n">idle</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">idle</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">callback</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">callback</span><span class="o">.</span><span class="na">onTransitionToIdle</span><span class="o">();</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">updateIdle</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">setIdle</span><span class="o">(</span><span class="n">resources</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>The three methods <code class="highlighter-rouge">getName()</code>, <code class="highlighter-rouge">isIdleNow()</code> and <code class="highlighter-rouge">registerResource()</code> are used in espresso when we register the resource with the testing framework (as we will see later). The other methods allow us to mange the resources to tell espresso whether we are idle yet. By using <code class="highlighter-rouge">registerResource()</code>, we add a string to the resources list, which in turns prevents the <code class="highlighter-rouge">isIdleNow()</code> from returning true. We can then register as many resources as we want. Of course, we need to remember to unregister the resources when we are done with them.</p>
+
+<p>One example of when we would use this is if we are using a thread to do some operation, and then using an interface to call back to the main thread. We would register the resource just before the beginning of the thread, and then at the end of the callback in the activity / fragment we would then unregister the resource. Usually when using a Thread or a normal <code class="highlighter-rouge">AsyncTask</code> we shouldn’t need to worry about using an <code class="highlighter-rouge">IdlingResource</code> because Espresso deals with them itself. However if we are not using the default thread pool for the <code class="highlighter-rouge">Thread</code> / <code class="highlighter-rouge">AsyncTask</code> then Espresso is not able to deal with it itself, and consequently we will need the use the <code class="highlighter-rouge">IdlingResource</code>s. Typically, libraries such as Retrofit do NOT use the default thread pool. Retrofit is the cause of the reason I often have to use <code class="highlighter-rouge">IdlingResource</code>s in my tests.</p>
+
+<p>The next step is to register the fact that we are using these <code class="highlighter-rouge">IdlingResources</code> with Espresso, so that it knows to check. This is a little tricky if we have gone into an activity that we didn’t start off with using an <code class="highlighter-rouge">IntentsTestRule</code> or <code class="highlighter-rouge">ActivityTestRule</code>. However, luckily we can use some code to get the currently running activity and from there any fragments that we may be using. This code can be found in another of my posts located <a href="https://geekhole.github.io/android/2015/09/19/care-for-an-espresso-i-need-the-current-activity/">here</a>.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">myIdlingResourcesTest</span><span class="o">(){</span>
+    <span class="n">IdlingResource</span> <span class="n">resource</span> <span class="o">=</span> <span class="o">(</span><span class="n">BaseActivity</span><span class="o">)</span> <span class="n">getActivityInstance</span><span class="o">();</span>
+    <span class="n">Espresso</span><span class="o">.</span><span class="na">registerIdlingResources</span><span class="o">(</span><span class="n">resource</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>This code is all you need to call before you begin the asynchronous operation. So, if the operation begins when you click a button, call the <code class="highlighter-rouge">registerIdlingResources()</code> function just before you tell Espresso to click the button. At the end of the test, or when you are finished with the resource, remember to unregister the resource.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code> <span class="nd">@Test</span>
+ <span class="kd">public</span> <span class="kt">void</span> <span class="nf">myIdlingResourcesTest</span><span class="o">(){</span>
+        <span class="o">...</span>
+        <span class="n">Espresso</span><span class="o">.</span><span class="na">unregisterIdlingResources</span><span class="o">(</span><span class="n">resource</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>If you have a lot of <code class="highlighter-rouge">IdlingResource</code>s it might be a good idea to create a helper class that registers all the resources for the tests, and then cleans them all up in the <code class="highlighter-rouge">@After</code> all.</p>
+
+<p>Something like the following does the trick nicely for me.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">IdlingResourcesHelper</span> <span class="o">{</span>
+   <span class="kd">private</span> <span class="kd">static</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">IdlingResource</span><span class="o">&gt;</span> <span class="n">idlingResources</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+   <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">registerResource</span><span class="o">(</span><span class="n">IdlingResource</span> <span class="n">resource</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">Espresso</span><span class="o">.</span><span class="na">registerIdlingResources</span><span class="o">(</span><span class="n">resource</span><span class="o">);</span>
+      <span class="n">idlingResources</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">resource</span><span class="o">);</span>
+   <span class="o">}</span>
+
+
+   <span class="cm">/** Unregisters all resources and cleans all static data in the IdlingResources class. This should be used after
+    * each test has been completed to ensure we start with a new set of data each time. */</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">clean</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">for</span> <span class="o">(</span><span class="n">IdlingResource</span> <span class="n">resource</span> <span class="o">:</span> <span class="n">idlingResources</span><span class="o">)</span> <span class="o">{</span>
+         <span class="n">Espresso</span><span class="o">.</span><span class="na">unregisterIdlingResources</span><span class="o">(</span><span class="n">resource</span><span class="o">);</span>
+      <span class="o">}</span>
+
+      <span class="n">idlingResources</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+    
+  </div>
+  <!-- comments -->
+  
+    <div class="container narrow-width">
+      <hr>
+      <div class="comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'geekhole'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      </div>
+    </div>
+  
+  <!-- pager -->
+  <div class="container blog-pager narrow-width">
+    <ul class="pager">
+      
+        <li class="previous">
+          <a href="/android/2015/09/19/care-for-an-espresso-i-need-the-current-activity/" data-toggle="tooltip" data-placement="top" title="Care for an Espresso? – I need the current Activity!">&larr; Previous Post</a>
+        </li>
+      
+      
+        <li class="next">
+          <a href="/android/2015/09/24/care-for-an-espresso-custom-actions/" data-toggle="tooltip" data-placement="top" title="Care for an Espresso? – Custom Actions">Next Post &rarr;</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+        <div class="container narrow-width">
+      <footer class="footer">
+        <div class="row">
+          <div class="col-sm-6">
+            <p>
+              By <a href="http://joshuamason.me/">Joshua Mason</a>. Hosted on Github Pages.<br>
+              Unless otherwise stated, everything here is <a href="https://creativecommons.org/licenses/by-nc/3.0/">CC-BY-NC</a>.
+            </p>
+          </div>
+          <div class="col-sm-6 text-right social-icons">
+            <a href="https://twitter.com/geekholeuk"><span class="symbol">circletwitterbird</span></a>
+            <a href="https://github.com/Geekhole"><span class="symbol">circlegithubalt</span></a>
+            <a href="https://uk.linkedin.com/in/josh-mason-733522121"><span class="symbol">circlelinkedin</span></a>
+          </div>
+      </footer>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+      <script type="text/javascript">
+        $('h2').replaceWith(function() {
+        var span = $('<span>').text($(this).text());
+        return $('<h2>').append(span);
+        });
+        $('h3').replaceWith(function() {
+        var span = $('<span>').text($(this).text());
+        return $('<h3>').append(span);
+        });
+      </script>
+    
+    <script src="/js/smartquotes.min.js"></script>
+  </body>
+</html>
+
+
+    
+
+
+</body>
+
+</html>

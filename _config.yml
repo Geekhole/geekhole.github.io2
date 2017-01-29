@@ -1,0 +1,109 @@
+# Site settings
+title: Geekhole
+email: josh@geekhole.uk
+copyright_name: Joshua Mason
+description: "All the tech you can take."
+baseurl: ""
+url: "http://geekhole.github.io/"
+twitter_username: geekholeuk
+github_username:  Geekhole
+email_username:  joshua.mason@geekhole.uk
+disqus_shortname: geekhole
+
+# google_tracking_id:
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+paginate: 9
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+
+gems: [jekyll-paginate, jekyll-feed]
+
+# Defaults
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      header-color: 808080
+      text-color: FFFFFF
+
+prose:
+  rooturl: '_posts'
+  siteurl: 'http://geekhole.github.io/'
+  media: 'images'
+  metadata:
+    _posts:
+      - name: "published"
+        field:
+          label: "Published"
+          element: "checkbox"
+          value: "true"
+      - name: "layout"
+        field:
+          element: "hidden"
+          label: "Layout"
+          value: "post"
+      - name: "title"
+        field:
+          label: "Title"
+          element: "text"
+          placeholder: "Enter post title"
+      - name: "author"
+        field:
+          element: "select"
+          label: "Author"
+          value: Joshua Mason
+          options:
+            - name: "Joshua Mason"
+              value: Joshua Mason
+            - name: "Michael McGovern"
+              value: Michael McGovern
+            - name: "Scott Stansfield"
+              value: Scott Stansfield
+      - name: "date"
+        field:
+          element: "text"
+          label: "Date"
+          placeholder: "YYYY-MM-DD"
+          value: CURRENT_DATETIME
+      - name: "modified"
+        field:
+          element: "text"
+          label: "Modified?"
+          placeholder: "YYYY-MM-DD"
+      - name: "modification_reason"
+        field:
+          element: "text"
+          label: "Modification reason"
+          placeholder: "Post updated ...to, ...because"
+      - name: "category"
+        field:
+          element: "multiselect"
+          label: "Categories"
+          placeholder: "Choose categories"
+          value: Personal
+          options:
+            - name: "Personal"
+              value: Personal
+            - name: "Android"
+              value: Android
+            - name: "Web-Development"
+              value: Web Development
+            - name: "Reviews"
+              value: Reviews
+          alterable: true
+      - name: "tags"
+        field:
+          element: "text"
+          label: "Tags"
+          placeholder: "Enter tags separated by spaces"
+      - name: "comments"
+        field:
+          element: "checkbox"
+          label: "Comments"
+          value: true

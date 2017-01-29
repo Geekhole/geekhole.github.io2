@@ -1,0 +1,63 @@
+---
+layout: default
+---
+
+<div class="blog-post">
+  <!-- header -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1><span>{{ page.title }}</span></h1>
+      <p class="meta text-muted">
+        Posted by
+        {% if page.author %}
+          {{ page.author }}
+        {% else %}
+          {{ site.title }}
+        {% endif %}
+        on
+        {{ page.date | date: "%-d %B %Y" }}
+      </p>
+    </div>
+  </div>
+  <!-- content -->
+  <div class="container narrow-width post-content">
+    {{ content }}
+    {% if page.modified %}
+      <p class="alert alert-info small" role="alert">
+        <strong>Post updated</strong> by
+        {{ page.author }} on
+        {% if page.modification_reason %}
+          {{ page.modified | date: "%-d %B %Y" }}
+          {{ page.modification_reason }}
+        {% else %}
+          {{ page.modified | date: "%-d %B %Y" }}.
+        {% endif %}
+      </p>
+    {% endif %}
+  </div>
+  <!-- comments -->
+  {% if site.disqus_shortname and page.comments == true %}
+    <div class="container narrow-width">
+      <hr>
+      <div class="comments">
+        <div id="disqus_thread"></div>
+        {% include comments.html %}
+      </div>
+    </div>
+  {% endif %}
+  <!-- pager -->
+  <div class="container blog-pager narrow-width">
+    <ul class="pager">
+      {% if page.previous.url %}
+        <li class="previous">
+          <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">&larr; Previous Post</a>
+        </li>
+      {% endif %}
+      {% if page.next.url %}
+        <li class="next">
+          <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Next Post &rarr;</a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+</div>

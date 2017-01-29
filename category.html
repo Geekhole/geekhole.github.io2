@@ -1,0 +1,64 @@
+---
+layout: default
+title:  Categories
+---
+
+{% include categoriesmenu.html %}
+
+<div class="container narrow-width text-center">
+  <ul class="nav nav-pills" style="display: inline-block;">
+    {% for ct in cats %}
+      <li role="presentation">
+        <a href="#{{ ct | slugify }}">{{ ct }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  </div>
+<div class="container narrow-width">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ct in cats %}
+        <tr>
+          <td colspan="2">
+            <strong id="{{ ct | slugify }}">{{ ct }}</strong>
+          </td>
+        </tr>
+        {% for post in site.posts %}
+          {% if post.category contains ct %}
+            <tr>
+              <td>
+                <a href="{{ post.url }}">{{ post.title }}</a>
+              </td>
+              <td>
+                {{ post.date | date_to_string }}
+              </td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+{% comment %}
+  <h2 class="h3" id="uncategorised">Uncategorised</h2>
+  <ul class="category-list">
+    {% for post in site.posts %}
+      {% unless post.category %}
+        <li>
+          <strong><a href="{{ post.url }}">{{ post.title }}</a></strong>
+          <small class="text-muted">{{ post.date | date_to_string }}</small><br>
+          {% if post.subtitle %}{{ post.subtitle }}{% endif %}
+        </li>
+      {% endunless %}
+    {% endfor %}
+  </ul>
+{% endcomment %}

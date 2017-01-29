@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+        Targeting the iPad – CSS - Geekhole
+      
+    </title>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/new.css" rel="stylesheet">
+    <link href="/css/syntax.css" rel="stylesheet">
+    <link href="/fonts/socialicons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700|Open+Sans:400,400i,700|Source+Serif+Pro:400,600,700&amp;subset=latin-ext" rel="stylesheet">
+    <meta name="author" content="Joshua Mason">
+    <meta name="description" content="All the tech you can take.">
+    <!-- I'm not sure what this does 👇 -->
+    <link rel="canonical" href="http://localhost:4000/web%20development/2016/01/11/targeting-the-ipad-css/">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Geekhole" />
+</head>
+
+
+<body>
+
+    
+
+
+
+
+
+
+
+
+
+    <div class="container narrow-width header">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">
+          <img src="/img/geekhole.png" style="height: 80px;">
+        </a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <!-- <ul class="nav nav-pills navbar-nav navbar-right"> -->
+        <ul class="nav nav-pills navbar-right">
+          <li >
+            <a href="/">Home</a>
+          </li>
+          
+            
+              
+                
+                  <li >
+                    <a href="/about/">About</a>
+                  </li>
+                
+              
+            
+          
+            
+              
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              
+                <li><a href="/category/#android">Android</a></li>
+              
+                <li><a href="/category/#development">Development</a></li>
+              
+                <li><a href="/category/#personal">Personal</a></li>
+              
+                <li><a href="/category/#reviews">Reviews</a></li>
+              
+                <li><a href="/category/#web-development">Web Development</a></li>
+              
+              <li role="separator" class="divider"></li>
+              <li><a href="/category/">Archive</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+    <div class="blog-post">
+  <!-- header -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1><span>Targeting the iPad – CSS</span></h1>
+      <p class="meta text-muted">
+        Posted by
+        
+          Joshua Mason
+        
+        on
+        11 January 2016
+      </p>
+    </div>
+  </div>
+  <!-- content -->
+  <div class="container narrow-width post-content">
+    <p>Sometimes we want websites to look different in certain platforms. In this case we will be looking at targeting iPads with CSS to make it look different from other platforms.</p>
+
+<p>To do this we will be making use of media queries, which are usually used to target different screen sizes. Below are the relevant media queries required for the various iPads.</p>
+
+<p>iPads in portrait and landscape:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="k">@media</span> <span class="n">only</span> <span class="n">screen</span> <span class="n">and</span> <span class="p">(</span><span class="n">min-device-width</span> <span class="p">:</span> <span class="m">768px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">max-device-width</span> <span class="p">:</span> <span class="m">1024px</span><span class="p">)</span> <span class="p">{</span>
+<span class="c">/* YOUR STYLES HERE */</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>iPads in landscape:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="k">@media</span> <span class="n">only</span> <span class="n">screen</span> <span class="n">and</span> <span class="p">(</span><span class="n">min-device-width</span> <span class="p">:</span> <span class="m">768px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">max-device-width</span> <span class="p">:</span> <span class="m">1024px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">orientation</span> <span class="p">:</span> <span class="nb">landscape</span><span class="p">)</span> <span class="p">{</span>
+<span class="c">/* YOUR STYLES HERE */</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>iPads in portrait:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="k">@media</span> <span class="n">only</span> <span class="n">screen</span> <span class="n">and</span> <span class="p">(</span><span class="n">min-device-width</span> <span class="p">:</span> <span class="m">768px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">max-device-width</span> <span class="p">:</span> <span class="m">1024px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">orientation</span> <span class="p">:</span> <span class="nb">portrait</span><span class="p">)</span> <span class="p">{</span>
+<span class="c">/* YOUR STYLES HERE */</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="ipad-3--4-queries">iPad 3 &amp; 4 Queries</h3>
+
+<p>If you want to target the iPad 3 &amp; 4 then you’re in luck!</p>
+
+<p>Retina iPads in portrait and landscape:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="k">@media</span> <span class="n">only</span> <span class="n">screen</span> <span class="n">and</span> <span class="p">(</span><span class="n">min-device-width</span> <span class="p">:</span> <span class="m">768px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">max-device-width</span> <span class="p">:</span> <span class="m">1024px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">-webkit-min-device-pixel-ratio</span><span class="p">:</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+ <span class="c">/* STYLES GO HERE */</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Retina iPads in landscape:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="k">@media</span> <span class="n">only</span> <span class="n">screen</span> <span class="n">and</span> <span class="p">(</span><span class="n">min-device-width</span> <span class="p">:</span> <span class="m">768px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">max-device-width</span> <span class="p">:</span> <span class="m">1024px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">orientation</span> <span class="p">:</span> <span class="nb">landscape</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">-webkit-min-device-pixel-ratio</span><span class="p">:</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+ <span class="c">/* STYLES GO HERE */</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Retina iPads in portrait:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="k">@media</span> <span class="n">only</span> <span class="n">screen</span> <span class="n">and</span> <span class="p">(</span><span class="n">min-device-width</span> <span class="p">:</span> <span class="m">768px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">max-device-width</span> <span class="p">:</span> <span class="m">1024px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">orientation</span> <span class="p">:</span> <span class="nb">portrait</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">-webkit-min-device-pixel-ratio</span><span class="p">:</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+<span class="c">/* STYLES GO HERE */</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="ipad-1--2-queries">iPad 1 &amp; 2 Queries</h3>
+
+<p>Again, we can also specifically target iPads version 1 and 2.</p>
+
+<p>iPads 1 &amp; 2 in portrait &amp; landscape:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="k">@media</span> <span class="n">only</span> <span class="n">screen</span> <span class="n">and</span> <span class="p">(</span><span class="n">min-device-width</span> <span class="p">:</span> <span class="m">768px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">max-device-width</span> <span class="p">:</span> <span class="m">1024px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">-webkit-min-device-pixel-ratio</span><span class="p">:</span> <span class="m">1</span><span class="p">){</span>
+<span class="c">/* STYLES GO HERE */</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>iPads 1 &amp; 2 in landscape:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="k">@media</span> <span class="n">only</span> <span class="n">screen</span> <span class="n">and</span> <span class="p">(</span><span class="n">min-device-width</span> <span class="p">:</span> <span class="m">768px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">max-device-width</span> <span class="p">:</span> <span class="m">1024px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">orientation</span> <span class="p">:</span> <span class="nb">landscape</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">-webkit-min-device-pixel-ratio</span><span class="p">:</span> <span class="m">1</span><span class="p">)</span>  <span class="p">{</span>
+<span class="c">/* STYLES GO HERE */</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>iPads 1 &amp; 2 in portrait:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="k">@media</span> <span class="n">only</span> <span class="n">screen</span> <span class="n">and</span> <span class="p">(</span><span class="n">min-device-width</span> <span class="p">:</span> <span class="m">768px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">max-device-width</span> <span class="p">:</span> <span class="m">1024px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">orientation</span> <span class="p">:</span> <span class="nb">portrait</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">-webkit-min-device-pixel-ratio</span><span class="p">:</span> <span class="m">1</span><span class="p">)</span> <span class="p">{</span>
+<span class="c">/* STYLES GO HERE */</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="ipad-mini">iPad Mini</h3>
+
+<p>Finally, this wouldn’t be complete without looking at the iPad Mini!</p>
+
+<p>iPad mini in portrait &amp; landscape:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="k">@media</span> <span class="n">only</span> <span class="n">screen</span> <span class="n">and</span> <span class="p">(</span><span class="n">min-device-width</span> <span class="p">:</span> <span class="m">768px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">max-device-width</span> <span class="p">:</span> <span class="m">1024px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">-webkit-min-device-pixel-ratio</span><span class="p">:</span> <span class="m">1</span><span class="p">)</span>  <span class="p">{</span>
+<span class="c">/* STYLES GO HERE */</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>iPad mini in landscape:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="k">@media</span> <span class="n">only</span> <span class="n">screen</span> <span class="n">and</span> <span class="p">(</span><span class="n">min-device-width</span> <span class="p">:</span> <span class="m">768px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">max-device-width</span> <span class="p">:</span> <span class="m">1024px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">orientation</span> <span class="p">:</span> <span class="nb">landscape</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">-webkit-min-device-pixel-ratio</span><span class="p">:</span> <span class="m">1</span><span class="p">)</span>  <span class="p">{</span>
+<span class="c">/* STYLES GO HERE */</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>iPad mini in portrait:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="k">@media</span> <span class="n">only</span> <span class="n">screen</span> <span class="n">and</span> <span class="p">(</span><span class="n">min-device-width</span> <span class="p">:</span> <span class="m">768px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">max-device-width</span> <span class="p">:</span> <span class="m">1024px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">orientation</span> <span class="p">:</span> <span class="nb">portrait</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">-webkit-min-device-pixel-ratio</span><span class="p">:</span> <span class="m">1</span><span class="p">)</span>  <span class="p">{</span>
+<span class="c">/* STYLES GO HERE */</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+    
+  </div>
+  <!-- comments -->
+  
+    <div class="container narrow-width">
+      <hr>
+      <div class="comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'geekhole'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      </div>
+    </div>
+  
+  <!-- pager -->
+  <div class="container blog-pager narrow-width">
+    <ul class="pager">
+      
+        <li class="previous">
+          <a href="/android/2015/12/02/android-styling-the-contextual-action-mode/" data-toggle="tooltip" data-placement="top" title="Android – Styling the Contextual Action Mode">&larr; Previous Post</a>
+        </li>
+      
+      
+        <li class="next">
+          <a href="/android/2016/01/15/google-play-game-services-error-10002-result-sign-in-failed/" data-toggle="tooltip" data-placement="top" title="Google Play Game Services – Error 10002 (RESULT_SIGN_IN_FAILED)">Next Post &rarr;</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+        <div class="container narrow-width">
+      <footer class="footer">
+        <div class="row">
+          <div class="col-sm-6">
+            <p>
+              By <a href="http://joshuamason.me/">Joshua Mason</a>. Hosted on Github Pages.<br>
+              Unless otherwise stated, everything here is <a href="https://creativecommons.org/licenses/by-nc/3.0/">CC-BY-NC</a>.
+            </p>
+          </div>
+          <div class="col-sm-6 text-right social-icons">
+            <a href="https://twitter.com/geekholeuk"><span class="symbol">circletwitterbird</span></a>
+            <a href="https://github.com/Geekhole"><span class="symbol">circlegithubalt</span></a>
+            <a href="https://uk.linkedin.com/in/josh-mason-733522121"><span class="symbol">circlelinkedin</span></a>
+          </div>
+      </footer>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+      <script type="text/javascript">
+        $('h2').replaceWith(function() {
+        var span = $('<span>').text($(this).text());
+        return $('<h2>').append(span);
+        });
+        $('h3').replaceWith(function() {
+        var span = $('<span>').text($(this).text());
+        return $('<h3>').append(span);
+        });
+      </script>
+    
+    <script src="/js/smartquotes.min.js"></script>
+  </body>
+</html>
+
+
+    
+
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      {% if page.title %}
+        {{ page.title }} - {{ site.title }}
+      {% else %}
+        {{ site.title }}
+      {% endif %}
+    </title>
+    <link href="{{ "/css/bootstrap.css" | prepend: site.baseurl }}" rel="stylesheet">
+    <link href="{{ "/css/new.css" | prepend: site.baseurl }}" rel="stylesheet">
+    <link href="{{ "/css/syntax.css" | prepend: site.baseurl }}" rel="stylesheet">
+    <link href="{{ "/fonts/socialicons.css" | prepend: site.baseurl }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700|Open+Sans:400,400i,700|Source+Serif+Pro:400,600,700&amp;subset=latin-ext" rel="stylesheet">
+    <meta name="author" content="{{ site.copyright_name }}">
+    <meta name="description" content="{{ site.description }}">
+    <!-- I'm not sure what this does 👇 -->
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  {% feed_meta %}
+</head>
