@@ -18,6 +18,10 @@ So to help others along (and to speed up development of my own apps) I have publ
 
 "Please convert this into smart quotes or I'll be upset."
 
+<a role="button" class="btn btn-primary" href="http://google.com/">
+Google
+</a>
+
 ## My main points
 
 There are a few main points I want to go over. The first is that I always have a base `Activity` and a base Fragment. By this I mean that I have two abstract classes that extend `Activity` and `Fragment` respectively. By doing this we can put in all the methods that we know we will want to access from all of our activities / fragments. The most important ones in the activity are `setRootFragment()` and `pushFragment()`. These two methods give us the ability to easily add new fragments without repeating code. They are probably my favourite methods out of all of them!
