@@ -1,12 +1,13 @@
 ---
 layout: post
 published: true
-author: Joshua Masonw
+author: Joshua Mason
 text-color: FFFFFF
 comments: true
 title: 'Android NavigationView: Icons'
 category:
   - Android
+date: '2017-05-25 08:59 +0100'
 ---
 In brief, I’ll be describing how to add icons to the Android `NavigationView` component, as well as changing the colours of those icons.
 
